@@ -4,6 +4,7 @@
 <img src="./img/demo.jpg" alt="">
 <br>
 使用的库
+
 ```
 pip3 install requests
 pip3 install datetime
@@ -11,6 +12,7 @@ pip3 install time
 pip3 install random
 pip3 install json
 ```
+
 ### 在脚本的第9行改成自己的配置文件地址，一般青龙目录都是这个
 path = '/root/ql/config/config.sh'
 ### 在脚本的第10改成代理添加的行数，
