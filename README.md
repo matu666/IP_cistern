@@ -12,6 +12,7 @@ pip3 install time
 pip3 install random
 pip3 install json
 ```
+#### 需要下载 ip_broker.py 和 copy_ip目录的文件，否则报错
 
 ### 在脚本的第9行改成自己的配置文件地址，一般青龙目录都是这个
 path = '/root/ql/config/config.sh'
