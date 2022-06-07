@@ -12,7 +12,6 @@ python3 kill.py
 ```
 脚本自动添加守护进程，只需python3 kill.py即可，请勿再添加守护进程，使用python3 kill.py可以杀死原来全部ip_broker.py的所有守护进程，而后创建新的
 ## [青龙代理视频演示](https://youtu.be/zGoirXzPMQk)
-## 脚本自动添加守护进程，只需python3 ip_broker.py即可，会在当前目录下添加ip_broker.log控制台输出日志
 ## 下面是在青龙里面运行py文件检测到的IP
 <img src="./img/demo.jpg" alt="">
 <br>
