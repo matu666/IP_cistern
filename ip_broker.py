@@ -5,6 +5,8 @@ import time
 import requests  # 导入requests包
 from datetime import datetime, timedelta
 from copy_ip.heade import get_user_agent
+from copy_ip.log import log_ip
+
 # 请求头大全
 # ql配置文件路径默认是 /root/ql/config/config.sh
 path = '/root/ql/config/config.sh'
@@ -21,14 +23,13 @@ def get_ip():
     """
     # 清空字典内容，确保每次运行字典都是空的
     arrays.clear()
-    # print("字典清空")
+    log_ip("字典清空")
     # 获取网站数据
     url = 'https://uu-proxy.com/api/free'
     try:
 
         strhtml = requests.get(url, headers=get_user_agent())
         data = json.loads(strhtml.text)
-        # print(data)
         for i in range(len(data['free']['proxies'])):
 
             # 下面是 地址、端口号、协议、支持HTTPS
@@ -48,9 +49,10 @@ def get_ip():
 
         return data
     except Exception as e:
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print("爬取失败,请在控制台输入 curl https://uu-proxy.com/api/free 查看是否返回代理池数据，如果返回代理池数据，请在 https://github.com/XgzK/IP_cistern 上提交issue")
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("爬取失败,请在控制台输入 curl https://uu-proxy.com/api/free 查看是否返回代理池数据，如果返回代理池数据，请在 "
+              "https://github.com/XgzK/IP_cistern 上提交issue")
+        log_ip("爬取失败,请在控制台输入 curl https://uu-proxy.com/api/free 查看是否返回代理池数据，如果返回代理池数据，请在 "
+               "https://github.com/XgzK/IP_cistern 上提交issue")
 
 
 def countdown(data):
@@ -73,6 +75,7 @@ def countdown(data):
     # 把分钟转换成秒，比爬取网站更新慢一秒
     cc = cc.seconds + 1
     # print("等待时间", cc)
+    log_ip("等待时间" + str(cc) +"秒")
     time.sleep(cc)
 
 
@@ -84,9 +87,9 @@ def while_loop():
         get_random_ip()
         # 打印字典
         print("可用代理有：", arrays)
+        log_ip("可用代理有：" + str(arrays))
         # 定时任务
         countdown(data)
-
 
 
 def http_request(http_ip_port):
@@ -127,6 +130,7 @@ def get_random_ip():
         # 代理添加为空，表示代理池IP都不可用
         random_ip = " "
     # print("本次IP是", random_ip)
+    log_ip("本次IP是" + str(random_ip))
     # 写入文件
     try:
         f = open(path, 'r+')
@@ -134,19 +138,19 @@ def get_random_ip():
         # ql行数从一开始，python读取从零开始
         try:
             flist[line - 1] = '{}\n'.format(random_ip)
+            log_ip("写入文件成功,添加代理是: " + str(random_ip))
             f = open(path, 'w+')
             f.writelines(flist)
         except Exception as e:
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             print("第", line, "行不存在，请检查配置文件行数是否正确")
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            log_ip("异常问题" + str(e))
         f.close()
     except Exception as e:
 
         # 打印明显异常信息
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         print("路径", path, "不存在，检查路径是否正确，如果路径没有问题，请在 https://github.com/XgzK/IP_cistern 上提交issue")
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(e)
+        log_ip("路径" + path + "不存在，检查路径是否正确，如果路径没有问题，请在 https://github.com/XgzK/IP_cistern 上提交issue")
 
 
 if __name__ == '__main__':
