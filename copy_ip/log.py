@@ -2,7 +2,7 @@ import logging
 import os
 
 import time
-path = "./ql_ql_acting.log"
+path = "./ql_acting.log"
 # 1.创建日志器对象
 logger = logging.getLogger()
 # 2.创建处理器(控制台)
@@ -22,5 +22,5 @@ def log_ip(data):
 def dele_ip():
     # 当文件大于10M时，删除文件
     if os.path.getsize(path) > 10485760:
-        os.remove("./log.log")
+        os.remove(path)
         print("删除文件")

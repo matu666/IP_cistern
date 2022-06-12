@@ -36,14 +36,11 @@ def get_ip():
             ip = data['free']['proxies'][i]['ip']
             port = data['free']['proxies'][i]['port']
             protocol = data['free']['proxies'][i]['scheme']
-            htt = data['free']['proxies'][i]['support_https']
 
             # 把ip和port转换成字符串,并拼接成 协议://ip:port
             ip_port = str(protocol) + '://' + str(ip) + ':' + str(port)
 
-            # 过滤掉不支持HTTPS的代理
-            if htt:
-                http_request(ip_port)
+            http_request(ip_port)
         # 关闭爬取网站
         strhtml.close()
 
@@ -51,8 +48,7 @@ def get_ip():
     except Exception as e:
         print("爬取失败,请在控制台输入 curl https://uu-proxy.com/api/free 查看是否返回代理池数据，如果返回代理池数据，请在 "
               "https://github.com/XgzK/IP_cistern 上提交issue")
-        log_ip("爬取失败,请在控制台输入 curl https://uu-proxy.com/api/free 查看是否返回代理池数据，如果返回代理池数据，请在 "
-               "https://github.com/XgzK/IP_cistern 上提交issue")
+        log_ip("异常提示：" + str(e))
 
 
 def countdown(data):
@@ -149,8 +145,7 @@ def get_random_ip():
 
         # 打印明显异常信息
         print("路径", path, "不存在，检查路径是否正确，如果路径没有问题，请在 https://github.com/XgzK/IP_cistern 上提交issue")
-        print(e)
-        log_ip("路径" + path + "不存在，检查路径是否正确，如果路径没有问题，请在 https://github.com/XgzK/IP_cistern 上提交issue")
+        log_ip("异常问题" + str(e))
 
 
 if __name__ == '__main__':
