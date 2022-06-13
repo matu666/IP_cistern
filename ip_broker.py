@@ -28,10 +28,9 @@ def get_ip():
     url = 'https://uu-proxy.com/api/free'
     try:
 
-        strhtml = requests.get(url, headers=get_user_agent())
+        strhtml = requests.get(url, headers=get_user_agent(), verify=False)
         data = json.loads(strhtml.text)
         for i in range(len(data['free']['proxies'])):
-
             # 下面是 地址、端口号、协议、支持HTTPS
             ip = data['free']['proxies'][i]['ip']
             port = data['free']['proxies'][i]['port']
@@ -71,7 +70,7 @@ def countdown(data):
     # 把分钟转换成秒，比爬取网站更新慢一秒
     cc = cc.seconds + 1
     # print("等待时间", cc)
-    log_ip("等待时间" + str(cc) +"秒")
+    log_ip("等待时间" + str(cc) + "秒")
     time.sleep(cc)
 
 
@@ -98,9 +97,12 @@ def http_request(http_ip_port):
     }
     try:
         # 检测节点是否可用.多次检测，如果可用，就把节点添加到字典中，检测多个防止代理无效，主要用于京东使用代理验证京东网址是否支持代理
-        output1 = requests.get("https://plogin.m.jd.com/", proxies=proxies, headers=get_user_agent(), timeout=2)
-        output2 = requests.get("https://www.zhihu.com/", proxies=proxies, headers=get_user_agent(), timeout=2)
-        output3 = requests.get("https://www.jd.com/", proxies=proxies, headers=get_user_agent(), timeout=2)
+        output1 = requests.get("https://plogin.m.jd.com/", proxies=proxies, headers=get_user_agent())
+        output2 = requests.get("https://www.zhihu.com/", proxies=proxies, headers=get_user_agent())
+        output3 = requests.get("https://www.jd.com/", proxies=proxies, headers=get_user_agent())
+        output3.close()
+        output2.close()
+        output1.close()
         # print("节点可用")
         # 修改一行代码
         https_ip_port = 'export ALL_PROXY=' + http_ip_port
