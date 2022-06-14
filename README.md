@@ -1,6 +1,6 @@
 # 青龙使用代理池来避免黑IP问题
 ## 此文档默认为最新文档，同步脚本更新此文档
-## 需要下载 ip_broker.py 、kill.py 和 copy_ip目录的文件，否则报错
+## 需要下载 ip_broker.py 、kill.py 和 copy_ip、con.xml目录的文件，否则报错
 ## 运行脚本
 
 ```shell
@@ -11,6 +11,7 @@ python3 ip_broker.py
 python3 kill.py
 ```
 脚本自动添加守护进程，只需python3 kill.py即可，请勿再添加守护进程，使用python3 kill.py可以杀死原来全部ip_broker.py的所有守护进程，而后创建新的
+运行后请查看ql_acting.log日志是否有异常信息
 ## [青龙代理视频演示](https://youtu.be/zGoirXzPMQk)
 ## 脚本自动添加守护进程，只需python3 kill.py即可，会在当前目录下添加ip_broker.log控制台输出日志
 ## 下面是在青龙里面运行py文件检测到的IP
@@ -20,18 +21,12 @@ python3 kill.py
 根据需代码提示缺少依赖添加
 
 ```
+pip3 install sqlite3
 pip3 install requests
 pip3 install datetime
-pip3 install time
-pip3 install random
-pip3 install json
 ```
 
-### 在脚本的第10行改成自己的配置文件地址，一般青龙目录都是这个
-path = '/root/ql/config/config.sh'
-### 在脚本的第12改成代理添加的行数，
-line = int(134)
-请查看config.sh配置文件查看自己需要添加哪一行，选择空白行添加
+### 请在con.yml文件中配置相关信息
 
 ### 查看是否添加成功
 在青龙脚本管理-->新建脚本-->ip.py
@@ -51,11 +46,14 @@ print("检测到的IP", aas.text)
 #### 1.1版本
 添加日志输出，输出位置为当前目录下的ql_acting.log
 ql_acting.log > 10M 会清空日志
-#### 1.1.1版本
-修复节点筛选，比之前可用率更高
+#### 1.2版本
+换肉不换皮，基本能封闭的都分离的
+添加了sqlite3数据库，支持节点筛选
+添加国外代理
+优化代理检测速度，由原来单线程变成同时检测多个代理，极大减少了未来多节点的检测时间
 
 #### 未来版本
-增加一个节点池
+逐渐向代理池方向发展
 
 #### 问题：
     代理添加上不能用

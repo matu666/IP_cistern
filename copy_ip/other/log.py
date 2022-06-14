@@ -2,7 +2,10 @@ import logging
 import os
 
 import time
-path = "./ql_acting.log"
+
+from copy_ip.conn import read_yaml
+
+path = read_yaml()['log']
 # 1.创建日志器对象
 logger = logging.getLogger()
 # 2.创建处理器(控制台)
