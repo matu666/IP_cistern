@@ -1,0 +1,15 @@
+# 路径, ql配置文件路径默认是 /root/ql/config/config.sh
+path:
+  /root/ql/config/config.sh
+# 行数,配置文件添加ql的行数
+line:
+  130
+# 日志保存路径，脚本执行完成后会将日志保存在该路径下
+log:
+  ./ql_acting.log
+# 数据库未知
+db:
+  ./copy_ip/pysqlit/ip.db
+# 代理地区 现在只能查询 中国 = CN 国外 = NCN 全部 = ALL
+area:
+  ALL
