@@ -27,7 +27,7 @@ def get_git_ip():
         # print(len(http_port))
         # print(len(http_country))
         # print(len(http_type))
-        for i in range(len(http_ip)):
+        for i in range(len(http_ip) - 1):
             # 创建字典，里面存放所有网络协议,原因https 不能使用,但是转换成http协议可以使用
             http_ip_type = {"http": "http", "https": "http", "socks": "socks", "socks4": "socks4", "socks5": "socks5"}
             insert_data(http_ip[i] + ':' + http_port[i], http_ip[i], int(http_port[i]), http_ip_type[http_type[i]],
