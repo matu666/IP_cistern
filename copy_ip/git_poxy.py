@@ -1,5 +1,7 @@
-import requests
 import re
+
+import requests
+
 from copy_ip.other.heade import get_user_agent
 from copy_ip.other.log import log_ip
 from copy_ip.pysqlit.py3 import insert_data
@@ -33,5 +35,5 @@ def get_git_ip():
             insert_data(http_ip[i] + ':' + http_port[i], http_ip[i], int(http_port[i]), http_ip_type[http_type[i]],
                         http_country[i])
     except Exception as e:
-        print("异常问题是11111111" + str(e))
-        log_ip("异常问题，git_poxy" + str(e))
+        print("异常问题，git_poxy: " + str(e))
+        log_ip("异常问题，git_poxy: " + str(e))
