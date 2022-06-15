@@ -18,11 +18,12 @@ def get_random_ip():
     random_ip = None
     try:
         # 获取随机IP，如果没有IP，就把写入文件空，让ql使用主机IP
-        random_ip = random.randint(0, len(sql) - 1)
+        # random_ip = random.randint(len(sql))
+        random_ip = random.choice(sql)
         random_ip = 'export ALL_PROXY=' + sql[random_ip][3] + "://" + sql[random_ip][0]
     except Exception as e:
         # 代理添加为空，表示代理池IP都不可用
-        print("代理池IP都不可用", str(e))
+        print("代理池IP都不可用",str(e))
         random_ip = "export ALL_PROXY= ''"
     print("本次IP是", random_ip)
     log_ip("本次IP是" + str(random_ip))
