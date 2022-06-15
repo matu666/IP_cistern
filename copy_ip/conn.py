@@ -4,7 +4,7 @@
 import yaml
 
 
-def read_yaml(file_name="./con.yml"):
+def read_yaml(file_name="./conn.yml"):
     """
     读取yaml文件
     :param file_name:
